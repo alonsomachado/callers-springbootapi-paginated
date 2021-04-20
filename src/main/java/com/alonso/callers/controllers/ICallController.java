@@ -1,27 +1,32 @@
 package com.alonso.callers.controllers;
 
+import com.alonso.callers.model.Call;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
-@RestController
+/*** Não é complexo o suficiente para usar DTOs e Mappers para a comunicação externa ***/
+
 @RequestMapping("/api")
 public interface ICallController {
 
-    @GetMapping("/all")
-    public ResponseEntity<Map<String, Object>> getAll(
-            @RequestParam(required = false) String title,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "5") int size);
+	@GetMapping("/all")
+	ResponseEntity<Map<String, Object>> getAll(
+			@RequestParam(required = false) String filter,
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "5") int size);
 
-    @PostMapping //Decidir no POST se usar Request Body ou Request Param
-    public ResponseEntity<Map<String, Object>> addCall();
+	@PostMapping
+	ResponseEntity<Call> addCall(@RequestBody Call call);
 
-    //TODO Statistics - Criar um controller separado e Model para a estatisticas com o AOP
+	@PostMapping
+	ResponseEntity<List<Call>> addCalls(@RequestBody List<Call> calls);
 
-    @DeleteMapping
-    public ResponseEntity<Map<String, Object>> deleteCall(@RequestParam @NonNull Long id);
+	@DeleteMapping
+	ResponseEntity deleteCall(@RequestParam @NonNull Long id);
 
+	//TODO Statistics - Criar um controller separado e Model para a estatisticas com o AOP
 }

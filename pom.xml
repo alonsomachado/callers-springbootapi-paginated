@@ -14,7 +14,8 @@
 	<name>callers</name>
 	<description>Callers Api with Pagination - Spring Boot POC</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
+		<aspect4jversion>1.9.4</aspect4jversion>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -46,6 +47,22 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt // AOP Dependency -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspect4jversion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspect4jversion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+			<version>${aspect4jversion}</version>
 		</dependency>
 	</dependencies>
 
