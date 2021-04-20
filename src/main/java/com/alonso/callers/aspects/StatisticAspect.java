@@ -6,9 +6,11 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
 
 import java.util.logging.Logger;
 
+@Component
 @Aspect
 public class StatisticAspect {
 
@@ -21,8 +23,7 @@ public class StatisticAspect {
 	}
 
 	@Pointcut("target(com.alonso.callers.controllers.CallController)")
-	public void callControllerMethods() {
-	}
+	public void callControllerMethods() {}
 
 	@Before("callControllerMethods()")
 	public void logMethodCall(JoinPoint jp) {
@@ -32,6 +33,7 @@ public class StatisticAspect {
 		if (this.repo.existsById(methodName)) {
 			Statistic stat = this.repo.findById(methodName).get();
 			stat.setNumberOfTimeIsInvoked(stat.getNumberOfTimeIsInvoked() + 1);
+			this.repo.save(stat);
 		} else {
 			Statistic statistic = new Statistic(methodName, 1); //Primeira invocacao do metodo numberOfTimeIsInvoked vai para 1
 			this.repo.save(statistic);
