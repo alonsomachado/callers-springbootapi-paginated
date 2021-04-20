@@ -10,9 +10,9 @@ public interface ICallBS {
 
 	ResponseEntity<Map<String, Object>> getAllPaginated(String filter, int page, int size);
 
-	public ResponseEntity<Map<String, Object>> getCallerPaginated(Integer number, int page, int size);
+	ResponseEntity<Map<String, Object>> getCallerPaginated(Integer number, int page, int size);
 
-	public ResponseEntity<Map<String, Object>> getCalleePaginated(Integer number, int page, int size);
+	ResponseEntity<Map<String, Object>> getCalleePaginated(Integer number, int page, int size);
 
 	Call addCall(Call toSave);
 
