@@ -18,12 +18,13 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 public class Call {
+
 	@Id
 	@GeneratedValue
 	Long id;
 	Integer caller;
-	Integer calle;
+	Integer callee;
 	LocalDateTime start;
 	LocalDateTime end;
-	String type;
+	TypeCall type;
 }

@@ -19,14 +19,28 @@ public interface ICallController {
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "5") int size);
 
-	@PostMapping
+	@PostMapping("/add")
 	ResponseEntity<Call> addCall(@RequestBody Call call);
 
-	@PostMapping
+	@PostMapping("/add-list")
 	ResponseEntity<List<Call>> addCalls(@RequestBody List<Call> calls);
 
-	@DeleteMapping
+	@DeleteMapping("/delete/{id}")
 	ResponseEntity deleteCall(@RequestParam @NonNull Long id);
 
 	//TODO Statistics - Criar um controller separado e Model para a estatisticas com o AOP
+
+	/*** EXTRA API CALL METHODS just to make this interesting ***/
+
+	@GetMapping("/caller")
+	ResponseEntity<Map<String, Object>> getCaller(
+			@RequestParam(required = false) Integer filter,
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "5") int size);
+
+	@GetMapping("/callee")
+	ResponseEntity<Map<String, Object>> getCallee(
+			@RequestParam(required = false) Integer filter,
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "5") int size);
 }

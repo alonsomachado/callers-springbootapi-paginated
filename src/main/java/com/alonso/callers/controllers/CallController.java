@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,8 +21,7 @@ public class CallController implements ICallController {
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "5") int size
 	) {
-		Map<String, Object> response = new HashMap<>();
-		return new ResponseEntity<>(response, HttpStatus.OK);
+		return iCallService.getAllPaginated(filter, page, size);
 	}
 
 	@Override
@@ -39,6 +37,25 @@ public class CallController implements ICallController {
 	@Override
 	public ResponseEntity deleteCall(Long id) {
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	/* Extra methods just to search by the Caller and the receiver (Callee) */
+	@Override
+	public ResponseEntity<Map<String, Object>> getCaller(
+			@RequestParam(required = false) Integer filter,
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "5") int size
+	) {
+		return iCallService.getCallerPaginated(filter, page, size);
+	}
+
+	@Override
+	public ResponseEntity<Map<String, Object>> getCallee(
+			@RequestParam(required = false) Integer filter,
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "5") int size
+	) {
+		return iCallService.getCalleePaginated(filter, page, size);
 	}
 
 
