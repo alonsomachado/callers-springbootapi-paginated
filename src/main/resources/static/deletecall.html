@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Call - Caller API</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="img/icons/icon-192x192.png">
+    <meta name="theme-color" content="#fba231"/>
+
+    <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+<div id="menu" class="menu">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/index.html">Callers API</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/index.html">Home</a>
+                </li>
+                <li class="nav-item active" >
+                    <a class="nav-link" href="/addcall.html">Adicionar Call</a>
+                </li>
+                <li class="nav-item active" >
+                    <a class="nav-link" href="/deletecall.html">Deletar Call<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/stats.html">Estatisticas</a>
+                </li>
+            </ul>
+            <span class="navbar-text"> Projeto Spring Boot Call with AOP - 04/2021 </span>
+        </div>
+    </nav>
+</div>
+<div id="main-content" class="container">
+    <h1>Delete Call</h1>
+
+        <div class="form-group">
+            <label for="callid">Callee (Receiver)</label>
+            <input type="text" id="callid" class="form-control" placeholder="Call Id to Delete...">
+        </div>
+        <button id="delete" class="btn btn-danger btn-lg" onclick="deleteCall()">Delete</button>
+
+
+</div>
+</body>
+
+</html>

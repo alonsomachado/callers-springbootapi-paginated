@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+    <title>Adicionar Call - Caller API</title>
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="/css/main.css" type="text/css" media="all">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="img/icons/icon-192x192.png">
+    <meta name="theme-color" content="#fba231"/>
+
+    <link rel="manifest" href="manifest.json" />
+
+</head>
+<body>
+<div id="menu" class="menu">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/index.html">Callers API</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/index.html">Home</a>
+                </li>
+                <li class="nav-item active" >
+                    <a class="nav-link" href="/addcall.html">Adicionar Call <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active" >
+                    <a class="nav-link" href="/deletecall.html">Deletar Call</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/stats.html">Estatisticas</a>
+                </li>
+            </ul>
+            <span class="navbar-text"> Projeto Spring Boot Call with AOP - 04/2021 </span>
+        </div>
+    </nav>
+</div>
+<div id="main-content" class="container">
+    <div class="col-md-6">
+        <form id="myForm" action="/upload" enctype="multipart/form-data" method="post">
+            <div class="form-group">
+                <label for="caller">Caller (Caller)</label>
+                <input type="text" id="caller" class="form-control" placeholder="Caller Cellphone...">
+            </div>
+            <div class="form-group">
+                <label for="callee">Callee (Receiver)</label>
+                <input type="text" id="callee" class="form-control" placeholder="Callee Cellphone...">
+            </div>
+            <div class="form-group date">
+                <label for="datetimepickerstart">Starting Call Time</label>
+                <input type="datetime-local" id="datetimepickerstart" class="form-control" />
+            </div>
+            <div class="form-group date">
+                <label for="datetimepickerend">Ending Call Time</label>
+                <input type="datetime-local" id="datetimepickerend" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="calltype">Type</label>
+                <select name="calltype" id="calltype">
+                    <option value="1">INBOUND</option>
+                    <option value="0">OUTBOUND</option>
+                </select>
+            </div>
+
+            <button id="salvar" class="btn btn-primary btn-lg" type="submit">Salvar</button>
+        </form>
+    </div>
+
+</div>
+</body>
+
+<script>
+var form = document.getElementById("myForm");
+form.addEventListener('submit', e => {
+	e.preventDefault();
+
+	var url  = urllocalhost+"/api/add";
+
+	var data = {};
+	data.caller = document.getElementById("caller").value;
+	data.callee  = document.getElementById("callee").value;
+	data.type  = document.getElementById("calltype").value;
+	data.start  = document.getElementById("datetimepickerstart").value;
+	data.end  = document.getElementById("datetimepickerend").value;
+
+	var jsondata = JSON.stringify(data);
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+	xhr.onload = function () {
+		if (xhr.readyState == 4 && xhr.status == "200") {
+			console.log(xhr.responseText);
+			alert("SALVO! \n VERIFIQUE CONSOLE");
+		} else {
+			// Error
+		}
+	}
+	xhr.send(jsondata);
+});
+</script>
+</html>

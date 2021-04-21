@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 @Service
 public class StatisticsBS implements IStatisticsBS{
@@ -39,23 +40,23 @@ public class StatisticsBS implements IStatisticsBS{
 			List<Call> finalCallLogArray = callLogArray;
 
 			callers = callLogArray.stream().map(Call::getCaller).collect(Collectors.toSet());
-			callees = callLogArray.stream().map(Call::getCallee).collect(Collectors.toSet());;
+			callees = callLogArray.stream().map(Call::getCallee).collect(Collectors.toSet());
 
 			Map<String, Object> response = new HashMap<>();
 			response.put("Total number of calls ", callLogArray.size());
-			response.put("Total call cost ", callLogArray.stream().mapToDouble( a -> {
-				if(a.getType().equals(TypeCall.INBOUND)) {
+			response.put("Total call cost ", callLogArray.stream().mapToDouble(a -> {
+				if (a.getType().equals(TypeCall.INBOUND)) {
 					long milliseconds = a.getEnd().getTime() - a.getStart().getTime();
 					int seconds = (int) milliseconds / 1000;
 					int minutes = (seconds % 3600) / 60;
 					double value = 0.10d;
-					if(minutes>5){
+					if (minutes > 5) {
 						value += (minutes - 5) * 0.05;
 					}
 					return value;
 				}
 				return 0;
-			}));
+			}).sum());
 			callers.stream().forEach(caller -> {
 				callersObjectMap.put(caller, finalCallLogArray.stream().filter(a -> a.getCaller().equals(caller)).count());
 			});
