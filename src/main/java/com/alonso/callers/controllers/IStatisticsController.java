@@ -7,14 +7,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Map;
 
-@RequestMapping("/stats/")
+@RequestMapping("/stats")
 public interface IStatisticsController {
 
-	@GetMapping("/controllerstatistic/{methodName}")
-	ResponseEntity<Statistic> getStatistic(@PathVariable String methodName);
+	@GetMapping("/")
+	ResponseEntity<Map<String, Object>> generateCallStatistics();
 
-	@GetMapping("/controllerstatistics")
+	@GetMapping("/controllerstatistic/{methodName}")
+	ResponseEntity<Statistic> getControllerStatistic(@PathVariable String methodName);
+
+	@GetMapping("/controllerstatistics/all")
 	List<Statistic> getAllStatistics();
 
 }

@@ -1,33 +1,35 @@
 package com.alonso.callers.controllers;
 
 import com.alonso.callers.model.Statistic;
-import com.alonso.callers.repository.StatisticRepository;
-import org.springframework.http.HttpStatus;
+import com.alonso.callers.services.IStatisticsBS;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class StatisticsController implements IStatisticsController {
 
-	private final StatisticRepository repo;
+	private final IStatisticsBS statisticsBS;
 
-	public StatisticsController(StatisticRepository repo) {
-		this.repo = repo;
+	public StatisticsController(IStatisticsBS statisticsBS) {
+		this.statisticsBS = statisticsBS;
 	}
 
 	@Override
-	public ResponseEntity<Statistic> getStatistic(@PathVariable String methodName) {
+	public ResponseEntity<Map<String, Object>> generateCallStatistics() {
+		return statisticsBS.generateCallStatistics();
+	}
 
-		Statistic stat = this.repo.findById(methodName).get();
-
-		return new ResponseEntity(stat, HttpStatus.OK);
+	@Override
+	public ResponseEntity<Statistic> getControllerStatistic(@PathVariable String methodName) {
+		return statisticsBS.getControllerStatistic(methodName);
 	}
 
 	@Override
 	public List<Statistic> getAllStatistics() {
-		return this.repo.findAll();
+		return statisticsBS.getAllStatistics();
 	}
 }
