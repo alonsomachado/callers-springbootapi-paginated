@@ -9,8 +9,22 @@ function showList(message) {
 
 
 function getCalls(){
-
+    var data = {};
+    var hasData = false;
+    data.page = document.getElementById("pageid").value;
+    data.size = document.getElementById("pagesize").value;
+    data.filter  = document.getElementById("calltype").value;
+    if(data.filter === -1){
+        data.filter = null;
+    }
+    if(data.page || data.size || (data.filter != null) ){
+        hasData = true;
+    }
     var url  = urllocalhost+"/api/all";
+    /*+ (hasData ? "?" : "")
+        +(data.page ? "&page="data.page : "");
+        +(data.size ? "&size="data.size : "")
+        +(data.filter ? "&filter="data.filter : "");*/
     var xhr  = new XMLHttpRequest();
     xhr.open('GET', url, true);
 

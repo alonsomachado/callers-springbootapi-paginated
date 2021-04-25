@@ -26,7 +26,7 @@ public interface ICallController {
 	ResponseEntity<List<Call>> addCalls(@RequestBody List<Call> calls);
 
 	@DeleteMapping("/delete/{id}")
-	ResponseEntity deleteCall(@RequestParam Long id);
+	ResponseEntity deleteCall(@PathVariable String id);
 
 	//TODO Statistics - Criar um controller separado e Model para a estatisticas com o AOP
 

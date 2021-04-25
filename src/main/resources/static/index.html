@@ -52,7 +52,7 @@
             <div id="listaCalls"></div>
 
         </div>
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Pagination">
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled">
                     <a class="page-link" href="#" tabindex="-1">Previous</a>
@@ -65,11 +65,23 @@
                 </li>
             </ul>
         </nav>
+        <input hidden type="text" class="pageid" id="pageid"/>
+
         <div class="form-group">
-            <label for="calltype">Type</label>
+            <label for="calltype">Type:</label>
             <select name="calltype" id="calltype">
+                <option value="-1">ALL</option>
                 <option value="1">INBOUND</option>
                 <option value="0">OUTBOUND</option>
+            </select>
+            <label for="pagesize">Page Size:</label>
+            <select name="pagesize" id="pagesize">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
             </select>
         </div>
     </div>

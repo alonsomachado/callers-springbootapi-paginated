@@ -29,10 +29,12 @@ public class CallBS implements ICallBS {
 			Pageable paging = PageRequest.of(page, size);
 
 			Page<Call> pageCall;
-			if (filterType == null)
+			if (filterType == null) {
 				pageCall = repo.findAll(paging);
-			else
-				pageCall = repo.findByTypeContaining(TypeCall.valueOf(filterType), paging);
+			} else {
+				TypeCall myType = TypeCall.valueOf(filterType.toUpperCase());
+				pageCall = repo.findByTypeContaining(myType, paging);
+			}
 
 			callLogArray = pageCall.getContent();
 

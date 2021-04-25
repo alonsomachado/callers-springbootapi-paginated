@@ -37,7 +37,9 @@ public class CallController implements ICallController {
 	}
 
 	@Override
-	public ResponseEntity deleteCall(Long id) {
+	public ResponseEntity deleteCall(String id) {
+		Long idLong = Long.parseLong(id);
+		callService.deleteCall(idLong);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
